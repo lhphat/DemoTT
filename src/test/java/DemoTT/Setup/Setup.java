@@ -24,7 +24,7 @@ public class Setup {
             case "chrome":
                 driver = ChromeDriver(webURL);
                 break;
-            case "firefox":
+            case "Edge":
                 driver = Edge(webURL);
                 break;
             default:
