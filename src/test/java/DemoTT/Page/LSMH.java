@@ -23,7 +23,6 @@ public class LSMH {
             this.driver = driver;
         }
     }
-
     public void loggin() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         //Link tới trang dang nhap
@@ -45,11 +44,17 @@ public class LSMH {
         driver.findElement(clicktieptuc).click();
         WebElement NhapOTP = driver.findElement(OTP);
         NhapOTP.sendKeys("2106");
-        driver.findElement(dangnhap).submit();
+        driver.findElement(By.xpath("//button[contains(text(),'Xác nhận')]")).submit();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement element5 = driver.findElement(By.xpath("//b[@class='pending order-status']"));
+        js.executeScript("arguments[0].style.border='3px solid red'", element5); // Highlight cụm text "chờ xác nhận"
     }
     public void DNLSMH(String sdt){
      log.info("DangNhap");
      DangNhap(sdt);
+     String mainWindow = driver.getWindowHandle();
+     driver.switchTo().window(mainWindow);
+     driver.findElement(By.xpath("//a[contains(text(),'Hủy')]")).click();
     }
     static Logger log = LogManager.getLogger(LSMH.class.getName());
     public static void main(String[]args){
